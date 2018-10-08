@@ -73,11 +73,11 @@ func implements(q *Query) error {
 	path, action := findInterestingNode(qpos.info, qpos.path)
 
 	var method *types.Func
-	var T types.Type // selected type (receiver if method != nil)
+	var T types.Type
 
 	switch action {
 	case actionExpr:
-		// Is it a function or method?
+		// Is it a function (or method)?
 		if id, ok := path[0].(*ast.Ident); ok {
 			if function, ok := qpos.info.ObjectOf(id).(*types.Func); ok {
 				recv := function.Type().(*types.Signature).Recv()
